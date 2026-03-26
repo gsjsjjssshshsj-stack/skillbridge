@@ -2,52 +2,7 @@
 <html>
 <head>
 <title>SkillBridge</title>
-<style>
-body{
-font-family: Arial;
-margin:0;
-background:#f2f2f2;
-}
-
-header{
-background:#0a7ea4;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-nav{
-background:#333;
-padding:10px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:10px;
-text-decoration:none;
-font-size:18px;
-}
-
-section{
-padding:20px;
-}
-
-.card{
-background:white;
-padding:15px;
-margin:10px;
-border-radius:8px;
-}
-
-button{
-background:#0a7ea4;
-color:white;
-border:none;
-padding:10px;
-border-radius:5px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -57,75 +12,48 @@ border-radius:5px;
 <p>Connecting Rural Workers with Customers</p>
 </header>
 
-<nav>
-<a href="#register">Worker Register</a>
-<a href="#job">Post Job</a>
-<a href="#workers">Workers</a>
-<a href="#contact">Contact</a>
-</nav>
+<section>
 
-<section id="register">
 <h2>Worker Registration</h2>
-<div class="card">
-<form>
-Name:<br>
-<input type="text"><br><br>
 
-Skill:<br>
-<input type="text"><br><br>
+<input id="name" placeholder="Worker Name">
+<input id="skill" placeholder="Skill (Plumber, Electrician)">
+<input id="phone" placeholder="Phone Number">
 
-Phone:<br>
-<input type="number"><br><br>
+<button onclick="addWorker()">Register Worker</button>
 
-<button>Register</button>
-</form>
-</div>
 </section>
 
-<section id="job">
+<section>
+
+<h2>Search Worker</h2>
+
+<input id="search" placeholder="Search by skill" onkeyup="searchWorker()">
+
+</section>
+
+<section>
+
+<h2>Available Workers</h2>
+
+<div id="workerList"></div>
+
+</section>
+
+<section>
+
 <h2>Post a Job</h2>
-<div class="card">
-<form>
-Customer Name:<br>
-<input type="text"><br><br>
 
-Job Description:<br>
-<textarea></textarea><br><br>
+<input id="customer" placeholder="Customer Name">
+<input id="job" placeholder="Job Description">
 
-Location:<br>
-<input type="text"><br><br>
+<button onclick="postJob()">Post Job</button>
 
-<button>Post Job</button>
-</form>
-</div>
-</section>
-
-<section id="workers">
-<h2>Worker Profiles</h2>
-
-<div class="card">
-<h3>Ramesh</h3>
-<p>Skill: Electrician</p>
-<p>Phone: 9876543210</p>
-<button>Call</button>
-</div>
-
-<div class="card">
-<h3>Suresh</h3>
-<p>Skill: Plumber</p>
-<p>Phone: 9123456780</p>
-<button>Call</button>
-</div>
+<div id="jobList"></div>
 
 </section>
 
-<section id="contact">
-<h2>Contact</h2>
-<div class="card">
-<p>Call: 9876543210</p>
-<p>Email: skillbridge@gmail.com</p>
-</div>
-</section>
+<script src="script.js"></script>
 
 </body>
 </html>
