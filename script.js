@@ -17,8 +17,15 @@ function addWorker(){
 let name = document.getElementById("name").value
 let skill = document.getElementById("skill").value
 let phone = document.getElementById("phone").value
+let photoInput = document.getElementById("photo")
 
-let worker = {name,skill,phone}
+let photoURL = ""
+
+if(photoInput.files.length > 0){
+photoURL = URL.createObjectURL(photoInput.files[0])
+}
+
+let worker = {name,skill,phone,photo:photoURL}
 
 workers.push(worker)
 
@@ -38,12 +45,29 @@ list.innerHTML=""
 
 workers.forEach(w=>{
 
+let rating = Math.floor(Math.random()*5)+1
+
 list.innerHTML += `
 <div class="worker">
+
+<img src="${w.photo}" width="80">
+
 <h3>${w.name}</h3>
+
 <p>Skill: ${w.skill}</p>
+
 <p>Phone: ${w.phone}</p>
+
+<p>Rating: ${rating} ⭐</p>
+
 <a href="tel:${w.phone}">Call Worker</a>
+
+<br><br>
+
+<a href="https://www.google.com/maps/search/${w.skill} near me" target="_blank">
+View Location
+</a>
+
 </div>
 `
 
@@ -67,9 +91,13 @@ filtered.forEach(w=>{
 
 list.innerHTML += `
 <div class="worker">
+
 <h3>${w.name}</h3>
+
 <p>Skill: ${w.skill}</p>
+
 <p>Phone: ${w.phone}</p>
+
 </div>
 `
 
