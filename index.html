@@ -12,35 +12,34 @@
 <p>Connecting Rural Workers with Customers</p>
 </header>
 
-<section>
+<div class="slide">
+
+<!-- Slide 1 -->
+<div class="page active">
 
 <h2>Worker Registration</h2>
 
 <input id="name" placeholder="Worker Name">
-<input id="skill" placeholder="Skill (Plumber, Electrician)">
+<input id="skill" placeholder="Skill">
 <input id="phone" placeholder="Phone Number">
 
 <button onclick="addWorker()">Register Worker</button>
 
-</section>
+</div>
 
-<section>
+<!-- Slide 2 -->
+<div class="page">
 
 <h2>Search Worker</h2>
 
 <input id="search" placeholder="Search by skill" onkeyup="searchWorker()">
 
-</section>
-
-<section>
-
-<h2>Available Workers</h2>
-
 <div id="workerList"></div>
 
-</section>
+</div>
 
-<section>
+<!-- Slide 3 -->
+<div class="page">
 
 <h2>Post a Job</h2>
 
@@ -51,7 +50,16 @@
 
 <div id="jobList"></div>
 
-</section>
+</div>
+
+</div>
+
+<div class="navigation">
+
+<button onclick="prevSlide()">Previous</button>
+<button onclick="nextSlide()">Next</button>
+
+</div>
 
 <script src="script.js"></script>
 
