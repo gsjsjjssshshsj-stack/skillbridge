@@ -1,41 +1,16 @@
-let currentSlide = 0
-
-let slides = document.querySelectorAll(".page")
-
-function showSlide(index){
-
-slides.forEach(slide => slide.classList.remove("active"))
-
-slides[index].classList.add("active")
-
-}
-
-function nextSlide(){
-
-currentSlide++
-
-if(currentSlide >= slides.length){
-currentSlide = 0
-}
-
-showSlide(currentSlide)
-
-}
-
-function prevSlide(){
-
-currentSlide--
-
-if(currentSlide < 0){
-currentSlide = slides.length - 1
-}
-
-showSlide(currentSlide)
-
-}
-
-showSlide(currentSlide)
 let workers = JSON.parse(localStorage.getItem("workers")) || []
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.style.display="none"
+})
+
+document.getElementById(page).style.display="block"
+
+}
+
+showPage("home")
 
 function addWorker(){
 
@@ -51,6 +26,8 @@ localStorage.setItem("workers",JSON.stringify(workers))
 
 displayWorkers()
 
+alert("Worker Registered Successfully")
+
 }
 
 function displayWorkers(){
@@ -59,14 +36,14 @@ let list = document.getElementById("workerList")
 
 list.innerHTML=""
 
-workers.forEach(worker => {
+workers.forEach(w=>{
 
 list.innerHTML += `
 <div class="worker">
-<h3>${worker.name}</h3>
-<p>Skill: ${worker.skill}</p>
-<p>Phone: ${worker.phone}</p>
-<a href="tel:${worker.phone}">Call</a>
+<h3>${w.name}</h3>
+<p>Skill: ${w.skill}</p>
+<p>Phone: ${w.phone}</p>
+<a href="tel:${w.phone}">Call Worker</a>
 </div>
 `
 
@@ -86,13 +63,13 @@ let list = document.getElementById("workerList")
 
 list.innerHTML=""
 
-filtered.forEach(worker => {
+filtered.forEach(w=>{
 
 list.innerHTML += `
 <div class="worker">
-<h3>${worker.name}</h3>
-<p>Skill: ${worker.skill}</p>
-<p>Phone: ${worker.phone}</p>
+<h3>${w.name}</h3>
+<p>Skill: ${w.skill}</p>
+<p>Phone: ${w.phone}</p>
 </div>
 `
 
@@ -100,20 +77,14 @@ list.innerHTML += `
 
 }
 
-let jobs = []
-
 function postJob(){
 
 let customer = document.getElementById("customer").value
-let job = document.getElementById("job").value
-
-jobs.push({customer,job})
+let job = document.getElementById("jobdesc").value
 
 let jobList = document.getElementById("jobList")
 
-jobList.innerHTML += `
-<p><b>${customer}</b> needs: ${job}</p>
-`
+jobList.innerHTML += `<p><b>${customer}</b> needs: ${job}</p>`
 
 }
 
