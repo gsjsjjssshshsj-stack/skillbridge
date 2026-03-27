@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SkillBridge Startup</title>
+<title>SkillBridge</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
 <h1>SkillBridge</h1>
-<p>Connecting Rural Skilled Workers with Employers</p>
+
+<button onclick="changeLang()">🌐</button>
+
 </header>
 
-<div class="container">
+<div id="menu" class="menu">
 
-<div class="card">
-<h2>Worker Wallet</h2>
-<p>Balance</p>
-<h1 id="balance">₹2000</h1>
-
-<input type="number" id="amount" placeholder="Enter Amount">
-
-<button onclick="addMoney()">Add Money</button>
-<button onclick="withdrawMoney()">Withdraw</button>
-</div>
-
-<div class="card">
-<h2>Worker Profile</h2>
-<p>Name: Ramesh</p>
-<p>Skill: Carpenter</p>
-<p>Village: Rampuram</p>
-</div>
-
-<div class="card">
-<h2>Available Jobs</h2>
-
-<div class="job">
-Carpenter Needed – ₹600/day
-<button onclick="applyJob()">Apply</button>
-</div>
-
-<div class="job">
-Electrician Work – ₹500/day
-<button onclick="applyJob()">Apply</button>
-</div>
+<button>🏠 Home</button>
+<button>🔧 Find Work</button>
+<button>📝 Post Job</button>
+<button>💰 Wallet</button>
+<button>📞 Help</button>
 
 </div>
+
+<div class="main">
+
+<h2 id="welcome">Welcome</h2>
+
+<button class="big">🔧 Find Work</button>
+
+<button class="big">📝 Post Job</button>
+
+<button class="big">📞 Call Employer</button>
+
+<button class="big voice" onclick="voice()">🎤 Speak Job</button>
+
+</div>
+
+<div class="wallet">
+
+<h2>Wallet</h2>
+
+<h1 id="balance">₹1000</h1>
+
+<input type="number" id="money" placeholder="Enter amount">
+
+<button onclick="add()">Add</button>
+
+<button onclick="withdraw()">Withdraw</button>
 
 </div>
 
