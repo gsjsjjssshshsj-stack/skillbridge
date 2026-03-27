@@ -3,219 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Matching Portal</title>
+    <title>GraminJobs | Local Worker & Employer Portal</title>
     <style>
-        /* --- CSS STYLES --- */
+        /* --- CSS VARIABLES & RESET --- */
         :root {
             --primary-green: #27ae60;
-            --secondary-green: #2ecc71;
+            --dark-green: #1e8449;
             --accent-orange: #e67e22;
-            --bg-light: #f0f4f3;
-            --text-main: #2c3e50;
+            --light-bg: #f8faf9;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-gray: #7f8c8d;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--light-bg); color: var(--text-dark); line-height: 1.6; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--white);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-green); }
+        .logo span { color: var(--accent-orange); }
+
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05)), url('https://via.placeholder.com/1920x400');
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero p { color: var(--text-gray); max-width: 600px; margin: 0 auto 20px; }
+
+        /* --- MAIN LAYOUT --- */
         .container {
-            max-width: 1000px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
+        /* --- CARD STYLING --- */
         .card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 1px solid #e0e0e0;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
+        .card:hover { transform: translateY(-5px); }
+        .card h2 { margin-bottom: 20px; font-size: 1.25rem; color: var(--dark-green); border-left: 4px solid var(--accent-orange); padding-left: 10px; }
 
-        h2 {
-            font-size: 1.1rem;
-            margin-top: 0;
-            color: #444;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
+        /* --- FORMS --- */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
         input, select {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
         }
 
         button {
             width: 100%;
             padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: opacity 0.2s;
-            margin-top: 10px;
+            transition: 0.3s;
         }
+        .btn-primary { background: var(--primary-green); color: white; }
+        .btn-primary:hover { background: var(--dark-green); }
+        .btn-secondary { background: var(--accent-orange); color: white; }
 
-        button:hover { opacity: 0.9; }
-
-        .btn-green { background-color: var(--primary-green); color: white; }
-        .btn-orange { background-color: var(--accent-orange); color: white; }
-        .btn-apply { 
-            background: white; 
-            border: 1.5px solid var(--primary-green); 
-            color: var(--primary-green); 
-            width: auto; 
-            padding: 6px 15px; 
-        }
-
-        /* Job List Specifics */
-        .job-item {
+        /* --- JOB FEED --- */
+        .job-card {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
         }
-        .job-info b { display: block; font-size: 0.95rem; }
-        .job-info span { font-size: 0.8rem; color: #7f8c8d; }
+        .job-card:last-child { border-bottom: none; }
+        .job-details b { color: #333; font-size: 1.05rem; }
+        .job-details p { font-size: 0.85rem; color: var(--text-gray); }
+        .btn-outline { 
+            width: auto; 
+            padding: 8px 15px; 
+            background: none; 
+            border: 1px solid var(--primary-green); 
+            color: var(--primary-green); 
+        }
 
-        /* Chat Specifics */
-        .chat-container {
-            background: #f9f9f9;
-            height: 150px;
-            padding: 10px;
-            border-radius: 8px;
+        /* --- CHAT BOX --- */
+        .chat-window {
+            background: #f1f3f4;
+            height: 180px;
+            border-radius: 10px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             overflow-y: auto;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .bubble {
-            padding: 8px 12px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            max-width: 80%;
-        }
-        .bubble.in { background: #dcf8c6; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .bubble.out { background: white; border: 1px solid #ddd; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .msg { padding: 8px 12px; border-radius: 15px; font-size: 0.9rem; max-width: 85%; }
+        .msg.sent { background: var(--primary-green); color: white; align-self: flex-end; }
+        .msg.received { background: white; align-self: flex-start; border: 1px solid #ddd; }
 
-        @media (max-width: 600px) {
-            .container { grid-template-columns: 1fr; }
+        /* --- FOOTER --- */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Mobile menu could be added here */
+            .hero h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <nav>
+        <div class="logo">Gramin<span>Jobs</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#register">Find Work</a></li>
+            <li><a href="#post">Hire Workers</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <button class="btn-primary" style="width: auto; padding: 8px 20px;">Login</button>
+    </nav>
+
+    <header class="hero">
+        <h1>Connecting Local Skills to Local Needs</h1>
+        <p>A simple platform for village workers to find daily jobs and for employers to hire trusted help quickly.</p>
+    </header>
+
+    <main class="container">
         
-        <section class="card">
+        <section class="card" id="register">
             <h2>Worker Registration</h2>
-            <form id="regForm">
-                <input type="text" placeholder="Your Name" required>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="e.g. Rahul Kumar">
+            </div>
+            <div class="form-group">
+                <label>Your Skill</label>
                 <select>
-                    <option value="">Select Your Skill</option>
                     <option>Carpentry</option>
+                    <option>Masonry</option>
                     <option>Electrician</option>
                     <option>Plumbing</option>
+                    <option>Farm Labor</option>
                 </select>
-                <input type="text" placeholder="Your Village">
-                <input type="tel" placeholder="Your Phone Number">
-                <button type="submit" class="btn-green">Register Now</button>
-            </form>
+            </div>
+            <div class="form-group">
+                <label>Village Name</label>
+                <input type="text" placeholder="Enter Village">
+            </div>
+            <button class="btn-primary" onclick="notify('Worker Registered!')">Register Now</button>
         </section>
 
-        <section class="card">
+        <section class="card" id="post">
             <h2>Post a Job</h2>
-            <form id="postForm">
-                <input type="text" placeholder="Job Title (e.g. Need Electrician)">
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" placeholder="Need Electrician for Home">
+            </div>
+            <div class="form-group">
+                <label>Location</label>
                 <select>
                     <option>Ramanpuram</option>
                     <option>Siddapur</option>
+                    <option>Kalyanpur</option>
                 </select>
-                <select>
-                    <option>1 Worker</option>
-                    <option>2 Workers</option>
-                </select>
-                <input type="text" placeholder="Wager (e.g. ₹500 per Day)">
-                <button type="submit" class="btn-orange">Post Job</button>
-            </section>
+            </div>
+            <div class="form-group">
+                <label>Wage per Day (₹)</label>
+                <input type="number" placeholder="500">
+            </div>
+            <button class="btn-secondary" onclick="notify('Job Posted Successfully!')">Post Job</button>
         </section>
 
         <section class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2>Nearby Jobs</h2>
-                <select style="width: auto; margin: 0; padding: 4px;">
-                    <option>Ramanpuram</option>
-                </select>
+            <h2>Jobs Near Ramanpuram</h2>
+            <div class="job-card">
+                <div class="job-details">
+                    <b>Carpenter Needed</b>
+                    <p>₹600/day | 2 Days Work</p>
+                </div>
+                <button class="btn-outline" onclick="apply()">Apply</button>
             </div>
-            <div id="jobList">
-                <div class="job-item">
-                    <div class="job-info">
-                        <b>Carpenter Needed</b>
-                        <span>₹600 per Day | 2 Days Work</span>
-                    </div>
-                    <button class="btn-apply" onclick="apply()">View & Apply</button>
+            <div class="job-card">
+                <div class="job-details">
+                    <b>Farm Labor Required</b>
+                    <p>₹400/day | Urgent</p>
                 </div>
-                <div class="job-item">
-                    <div class="job-info">
-                        <b>Farm Labor Required</b>
-                        <span>₹400 per Day | Urgent Work</span>
-                    </div>
-                    <button class="btn-apply" onclick="apply()">View & Apply</button>
+                <button class="btn-outline" onclick="apply()">Apply</button>
+            </div>
+            <div class="job-card">
+                <div class="job-details">
+                    <b>Electrician Wanted</b>
+                    <p>₹500/day | Repair Work</p>
                 </div>
-                <div class="job-item">
-                    <div class="job-info">
-                        <b>Electrician Wanted</b>
-                        <span>₹500 per Day | Call Now</span>
-                    </div>
-                    <button class="btn-apply" onclick="apply()">View & Apply</button>
-                </div>
+                <button class="btn-outline" onclick="apply()">Apply</button>
             </div>
         </section>
 
         <section class="card">
-            <h2>Chat with Employer</h2>
-            <div class="chat-container">
-                <div class="bubble out">Is the electrician job still available?</div>
-                <div class="bubble in">Yes, we need someone tomorrow.</div>
-                <div class="bubble out">Great, I'll be there by 9 AM.</div>
+            <h2>Quick Contact</h2>
+            <div class="chat-window">
+                <div class="msg received">Is the electrician job still available?</div>
+                <div class="msg sent">Yes, we need someone tomorrow morning.</div>
+                <div class="msg received">Great, I'll be there by 9 AM at the main square.</div>
             </div>
-            <button class="btn-green" onclick="window.location.href='tel:1234567890'">📞 Call Now</button>
+            <button class="btn-primary" onclick="location.href='tel:9100000000'">📞 Call Employer</button>
         </section>
 
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GraminJobs Portal. Empowering local communities.</p>
+        <div style="margin-top: 10px; font-size: 0.8rem; color: #bdc3c7;">
+            Privacy Policy | Terms of Service | Contact Help-Desk
+        </div>
+    </footer>
 
     <script>
-        /* --- JAVASCRIPT LOGIC --- */
-        
-        // Handle Form Submissions
-        document.getElementById('regForm').onsubmit = (e) => {
-            e.preventDefault();
-            alert("Registration Successful!");
-        };
-
-        document.getElementById('postForm').onsubmit = (e) => {
-            e.preventDefault();
-            alert("Job Posted Successfully!");
-        };
+        function notify(msg) {
+            alert(msg);
+        }
 
         function apply() {
-            alert("Application sent! Opening chat...");
+            alert("Application Sent! Check the 'Quick Contact' section to chat.");
         }
     </script>
 </body>
