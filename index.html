@@ -3,265 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GraminJobs | Local Worker & Employer Portal</title>
+    <title>SKILLBRIDGE | Professional Labor Exchange</title>
     <style>
-        /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary-green: #27ae60;
-            --dark-green: #1e8449;
-            --accent-orange: #e67e22;
-            --light-bg: #f8faf9;
-            --white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-gray: #7f8c8d;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --github-gray: #f6f8fa;
+            --github-border: #d0d7de;
+            --github-blue: #0969da;
+            --skill-green: #2da44e;
+            --skill-orange: #bf3908;
+            --text-main: #24292f;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--light-bg); color: var(--text-dark); line-height: 1.6; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background-color: #ffffff; color: var(--text-main); line-height: 1.5; }
 
-        /* --- NAVIGATION --- */
+        /* --- HEADER & NAV --- */
         nav {
-            background: var(--white);
+            background-color: #24292f;
+            color: white;
+            padding: 12px 5%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            gap: 20px;
         }
+        .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: 1px; color: white; text-decoration: none; }
+        .nav-links { display: flex; gap: 15px; font-size: 14px; }
+        .nav-links a { color: #c9d1d9; text-decoration: none; }
+        .nav-links a:hover { color: white; }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-green); }
-        .logo span { color: var(--accent-orange); }
-
-        .nav-links { list-style: none; display: flex; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary-green); }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
-            background: linear-gradient(rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05)), url('https://via.placeholder.com/1920x400');
-            text-align: center;
-            padding: 60px 20px;
+            background: var(--github-gray);
+            border-bottom: 1px solid var(--github-border);
+            padding: 40px 5%;
+            text-align: left;
         }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        .hero p { color: var(--text-gray); max-width: 600px; margin: 0 auto 20px; }
+        .hero h1 { font-size: 2rem; font-weight: 400; }
+        .hero span { font-weight: 600; color: var(--github-blue); }
 
-        /* --- MAIN LAYOUT --- */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+        /* --- LAYOUT --- */
+        .main-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 300px 1fr;
+            gap: 24px;
+            padding: 24px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* --- CARD STYLING --- */
-        .card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card h2 { margin-bottom: 20px; font-size: 1.25rem; color: var(--dark-green); border-left: 4px solid var(--accent-orange); padding-left: 10px; }
-
-        /* --- FORMS --- */
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
-        input, select {
+        /* --- LEFT COLUMN: FORMS --- */
+        .sidebar-section { margin-bottom: 32px; }
+        .sidebar-section h3 { font-size: 14px; margin-bottom: 8px; color: #57606a; }
+        .input-box {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 5px 12px;
+            font-size: 14px;
+            border: 1px solid var(--github-border);
+            border-radius: 6px;
+            background-color: var(--github-gray);
+            margin-bottom: 10px;
         }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
+        .btn {
+            display: inline-block;
+            padding: 5px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
             cursor: pointer;
-            transition: 0.3s;
+            border: 1px solid rgba(27, 31, 36, 0.15);
+            width: 100%;
+            text-align: center;
         }
-        .btn-primary { background: var(--primary-green); color: white; }
-        .btn-primary:hover { background: var(--dark-green); }
-        .btn-secondary { background: var(--accent-orange); color: white; }
+        .btn-primary { background-color: var(--skill-green); color: white; }
+        .btn-secondary { background-color: var(--github-gray); color: var(--text-main); }
 
-        /* --- JOB FEED --- */
-        .job-card {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
+        /* --- RIGHT COLUMN: GITHUB STYLE DIRECTORY --- */
+        .repo-list-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid var(--github-border);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
         }
-        .job-card:last-child { border-bottom: none; }
-        .job-details b { color: #333; font-size: 1.05rem; }
-        .job-details p { font-size: 0.85rem; color: var(--text-gray); }
-        .btn-outline { 
-            width: auto; 
-            padding: 8px 15px; 
-            background: none; 
-            border: 1px solid var(--primary-green); 
-            color: var(--primary-green); 
+        .repo-card {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--github-border);
         }
+        .repo-title { font-size: 20px; font-weight: 600; color: var(--github-blue); text-decoration: none; }
+        .repo-title:hover { text-decoration: underline; }
+        .repo-desc { font-size: 14px; color: #57606a; margin: 4px 0 8px 0; }
+        
+        /* Language Tags (GitHub Style) */
+        .meta-data { display: flex; gap: 15px; font-size: 12px; color: #57606a; align-items: center; }
+        .lang-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+        .dot-carpentry { background: #3178c6; }
+        .dot-electric { background: #f1e05a; }
+        .dot-farm { background: #e34c26; }
 
         /* --- CHAT BOX --- */
-        .chat-window {
-            background: #f1f3f4;
-            height: 180px;
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
-            margin-bottom: 15px;
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border: 1px solid var(--github-border);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(140,149,159,0.2);
         }
-        .msg { padding: 8px 12px; border-radius: 15px; font-size: 0.9rem; max-width: 85%; }
-        .msg.sent { background: var(--primary-green); color: white; align-self: flex-end; }
-        .msg.received { background: white; align-self: flex-start; border: 1px solid #ddd; }
+        .chat-header { background: var(--github-gray); padding: 10px; border-bottom: 1px solid var(--github-border); font-weight: 600; font-size: 14px; }
+        .chat-body { padding: 10px; height: 120px; font-size: 13px; overflow-y: auto; background: #fff; }
+        .chat-msg { margin-bottom: 8px; }
 
-        /* --- FOOTER --- */
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; } /* Mobile menu could be added here */
-            .hero h1 { font-size: 1.8rem; }
+        @media (max-width: 850px) {
+            .main-content { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">Gramin<span>Jobs</span></div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#register">Find Work</a></li>
-            <li><a href="#post">Hire Workers</a></li>
-            <li><a href="#">About Us</a></li>
-        </ul>
-        <button class="btn-primary" style="width: auto; padding: 8px 20px;">Login</button>
+        <a href="#" class="logo">SKILLBRIDGE</a>
+        <div class="nav-links">
+            <a href="#">Pull requests</a>
+            <a href="#">Issues</a>
+            <a href="#">Marketplace</a>
+            <a href="#">Explore</a>
+        </div>
     </nav>
 
     <header class="hero">
-        <h1>Connecting Local Skills to Local Needs</h1>
-        <p>A simple platform for village workers to find daily jobs and for employers to hire trusted help quickly.</p>
+        <h1>Welcome to <span>SKILLBRIDGE</span></h1>
+        <p>The open-source labor marketplace for local communities.</p>
     </header>
 
-    <main class="container">
+    <div class="main-content">
         
-        <section class="card" id="register">
-            <h2>Worker Registration</h2>
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" placeholder="e.g. Rahul Kumar">
-            </div>
-            <div class="form-group">
-                <label>Your Skill</label>
-                <select>
+        <aside>
+            <div class="sidebar-section">
+                <h3>Worker Registration</h3>
+                <input type="text" class="input-box" placeholder="Full Name">
+                <select class="input-box">
+                    <option>Select Skill</option>
                     <option>Carpentry</option>
-                    <option>Masonry</option>
                     <option>Electrician</option>
-                    <option>Plumbing</option>
-                    <option>Farm Labor</option>
                 </select>
+                <button class="btn btn-primary">Create Profile</button>
             </div>
-            <div class="form-group">
-                <label>Village Name</label>
-                <input type="text" placeholder="Enter Village">
-            </div>
-            <button class="btn-primary" onclick="notify('Worker Registered!')">Register Now</button>
-        </section>
 
-        <section class="card" id="post">
-            <h2>Post a Job</h2>
-            <div class="form-group">
-                <label>Job Title</label>
-                <input type="text" placeholder="Need Electrician for Home">
+            <div class="sidebar-section">
+                <h3>Post a Job Issue</h3>
+                <input type="text" class="input-box" placeholder="Job Title">
+                <input type="text" class="input-box" placeholder="Wage (e.g. 500/day)">
+                <button class="btn btn-secondary">Open New Job</button>
             </div>
-            <div class="form-group">
-                <label>Location</label>
-                <select>
-                    <option>Ramanpuram</option>
-                    <option>Siddapur</option>
-                    <option>Kalyanpur</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Wage per Day (₹)</label>
-                <input type="number" placeholder="500">
-            </div>
-            <button class="btn-secondary" onclick="notify('Job Posted Successfully!')">Post Job</button>
-        </section>
+        </aside>
 
-        <section class="card">
-            <h2>Jobs Near Ramanpuram</h2>
-            <div class="job-card">
-                <div class="job-details">
-                    <b>Carpenter Needed</b>
-                    <p>₹600/day | 2 Days Work</p>
+        <section>
+            <div class="repo-list-header">
+                <h3>Available Workers & Jobs</h3>
+                <span style="font-size: 12px; color: #57606a;">Sort: Newest</span>
+            </div>
+
+            <div class="repo-card">
+                <a href="#" class="repo-title">Ramanpuram / Need-Electrician</a>
+                <p class="repo-desc">Urgent repair needed for community center irrigation pump wiring.</p>
+                <div class="meta-data">
+                    <span><span class="lang-dot dot-electric"></span>Electrician</span>
+                    <span>₹500/day</span>
+                    <span>Updated 2 hours ago</span>
+                    <button class="btn-secondary" style="width: auto; padding: 2px 10px;">Apply</button>
                 </div>
-                <button class="btn-outline" onclick="apply()">Apply</button>
             </div>
-            <div class="job-card">
-                <div class="job-details">
-                    <b>Farm Labor Required</b>
-                    <p>₹400/day | Urgent</p>
+
+            <div class="repo-card">
+                <a href="#" class="repo-title">Kalyanpur / Master-Carpenter-Available</a>
+                <p class="repo-desc">15 years experience in furniture and door framing. Tools included.</p>
+                <div class="meta-data">
+                    <span><span class="lang-dot dot-carpentry"></span>Carpentry</span>
+                    <span>Available Now</span>
+                    <span>Updated yesterday</span>
+                    <button class="btn-secondary" style="width: auto; padding: 2px 10px;">View Profile</button>
                 </div>
-                <button class="btn-outline" onclick="apply()">Apply</button>
             </div>
-            <div class="job-card">
-                <div class="job-details">
-                    <b>Electrician Wanted</b>
-                    <p>₹500/day | Repair Work</p>
+
+            <div class="repo-card">
+                <a href="#" class="repo-title">Siddapur / Farm-Labor-Group</a>
+                <p class="repo-desc">Team of 5 workers ready for harvest season. Specialized in paddy fields.</p>
+                <div class="meta-data">
+                    <span><span class="lang-dot dot-farm"></span>Farming</span>
+                    <span>₹400/day</span>
+                    <span>Updated 4 days ago</span>
+                    <button class="btn-secondary" style="width: auto; padding: 2px 10px;">Contact</button>
                 </div>
-                <button class="btn-outline" onclick="apply()">Apply</button>
             </div>
         </section>
+    </div>
 
-        <section class="card">
-            <h2>Quick Contact</h2>
-            <div class="chat-window">
-                <div class="msg received">Is the electrician job still available?</div>
-                <div class="msg sent">Yes, we need someone tomorrow morning.</div>
-                <div class="msg received">Great, I'll be there by 9 AM at the main square.</div>
-            </div>
-            <button class="btn-primary" onclick="location.href='tel:9100000000'">📞 Call Employer</button>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 GraminJobs Portal. Empowering local communities.</p>
-        <div style="margin-top: 10px; font-size: 0.8rem; color: #bdc3c7;">
-            Privacy Policy | Terms of Service | Contact Help-Desk
+    <div class="floating-chat">
+        <div class="chat-header">Direct Messages</div>
+        <div class="chat-body" id="chat">
+            <div class="chat-msg"><b>Employer:</b> Is the pump fixed?</div>
+            <div class="chat-msg" style="color: var(--github-blue)"><b>Worker:</b> On my way with spare wires.</div>
         </div>
-    </footer>
+        <div style="padding: 10px; border-top: 1px solid var(--github-border);">
+            <input type="text" class="input-box" placeholder="Write a message..." style="margin: 0;">
+        </div>
+    </div>
 
     <script>
-        function notify(msg) {
-            alert(msg);
-        }
-
-        function apply() {
-            alert("Application Sent! Check the 'Quick Contact' section to chat.");
-        }
+        // Simple console log to show the site is active
+        console.log("SKILLBRIDGE Portal Initialized.");
+        
+        // You could add dynamic filtering here based on the sidebar selects
     </script>
 </body>
 </html>
