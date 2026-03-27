@@ -1,27 +1,56 @@
-let balance = 2000;
+let balance = 1000;
 
-function addMoney(){
+function toggleMenu(){
 
-let amount = document.getElementById("amount").value;
+let menu = document.getElementById("menu");
 
-balance = balance + Number(amount);
-
-document.getElementById("balance").innerText = "₹" + balance;
-
-}
-
-function withdrawMoney(){
-
-let amount = document.getElementById("amount").value;
-
-balance = balance - Number(amount);
-
-document.getElementById("balance").innerText = "₹" + balance;
+menu.style.display =
+menu.style.display === "block" ? "none" : "block";
 
 }
 
-function applyJob(){
+function add(){
 
-alert("Job Application Sent!");
+let money = document.getElementById("money").value;
+
+balance += Number(money);
+
+document.getElementById("balance").innerText = "₹"+balance;
+
+}
+
+function withdraw(){
+
+let money = document.getElementById("money").value;
+
+balance -= Number(money);
+
+document.getElementById("balance").innerText = "₹"+balance;
+
+}
+
+function voice(){
+
+alert("Voice job search coming soon");
+
+}
+
+let lang = "en";
+
+function changeLang(){
+
+if(lang === "en"){
+
+document.getElementById("welcome").innerText="स्वागत है";
+
+lang = "hi";
+
+}else{
+
+document.getElementById("welcome").innerText="Welcome";
+
+lang = "en";
+
+}
 
 }
