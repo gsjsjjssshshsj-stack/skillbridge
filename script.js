@@ -1,56 +1,119 @@
-let balance = 1000;
+let workers = JSON.parse(localStorage.getItem("workers")) || []
 
-function toggleMenu(){
+function showPage(page){
 
-let menu = document.getElementById("menu");
+document.querySelectorAll(".page").forEach(p=>{
+p.style.display="none"
+})
 
-menu.style.display =
-menu.style.display === "block" ? "none" : "block";
-
-}
-
-function add(){
-
-let money = document.getElementById("money").value;
-
-balance += Number(money);
-
-document.getElementById("balance").innerText = "₹"+balance;
+document.getElementById(page).style.display="block"
 
 }
 
-function withdraw(){
+showPage("home")
 
-let money = document.getElementById("money").value;
+function addWorker(){
 
-balance -= Number(money);
+let name = document.getElementById("name").value
+let skill = document.getElementById("skill").value
+let phone = document.getElementById("phone").value
+let photoInput = document.getElementById("photo")
 
-document.getElementById("balance").innerText = "₹"+balance;
+let photoURL = ""
+
+if(photoInput.files.length > 0){
+photoURL = URL.createObjectURL(photoInput.files[0])
+}
+
+let worker = {name,skill,phone,photo:photoURL}
+
+workers.push(worker)
+
+localStorage.setItem("workers",JSON.stringify(workers))
+
+displayWorkers()
+
+alert("Worker Registered Successfully")
 
 }
 
-function voice(){
+function displayWorkers(){
 
-alert("Voice job search coming soon");
+let list = document.getElementById("workerList")
+
+list.innerHTML=""
+
+workers.forEach(w=>{
+
+let rating = Math.floor(Math.random()*5)+1
+
+list.innerHTML += `
+<div class="worker">
+
+<img src="${w.photo}" width="80">
+
+<h3>${w.name}</h3>
+
+<p>Skill: ${w.skill}</p>
+
+<p>Phone: ${w.phone}</p>
+
+<p>Rating: ${rating} ⭐</p>
+
+<a href="tel:${w.phone}">Call Worker</a>
+
+<br><br>
+
+<a href="https://www.google.com/maps/search/${w.skill} near me" target="_blank">
+View Location
+</a>
+
+</div>
+`
+
+})
 
 }
 
-let lang = "en";
+function searchWorker(){
 
-function changeLang(){
+let search = document.getElementById("search").value.toLowerCase()
 
-if(lang === "en"){
+let filtered = workers.filter(w =>
+w.skill.toLowerCase().includes(search)
+)
 
-document.getElementById("welcome").innerText="स्वागत है";
+let list = document.getElementById("workerList")
 
-lang = "hi";
+list.innerHTML=""
 
-}else{
+filtered.forEach(w=>{
 
-document.getElementById("welcome").innerText="Welcome";
+list.innerHTML += `
+<div class="worker">
 
-lang = "en";
+<h3>${w.name}</h3>
+
+<p>Skill: ${w.skill}</p>
+
+<p>Phone: ${w.phone}</p>
+
+</div>
+`
+
+})
 
 }
 
+function postJob(){
+
+let customer = document.getElementById("customer").value
+let job = document.getElementById("jobdesc").value
+
+let jobList = document.getElementById("jobList")
+
+jobList.innerHTML += `<p><b>${customer}</b> needs: ${job}</p>`
+
 }
+
+displayWorkers()
